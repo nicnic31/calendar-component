@@ -69,6 +69,10 @@ export default function Input({ value, onChange, format }: IInputProps) {
       setDisplay((prev) => ({ ...prev, displayYr: e.target.value }));
       setCalendar(month, Number(e.target.value), day);
       setSelectedDate(dayjs(`${Number(e.target.value)}-${month + 1}-${day}`));
+
+      // to update the display date text
+      onChange &&
+        onChange(dayjs(`${Number(e.target.value)}-${month + 1}-${day}`));
     }
   };
 
@@ -82,6 +86,9 @@ export default function Input({ value, onChange, format }: IInputProps) {
       setDisplay((prev) => ({ ...prev, displayMonth: e.target.value }));
       setCalendar(Number(e.target.value) - 1, year, day);
       setSelectedDate(dayjs(`${year}-${Number(e.target.value)}-${day}`));
+
+      // to update the display date text
+      onChange && onChange(dayjs(`${year}-${Number(e.target.value)}-${day}`));
     }
   };
 
@@ -95,6 +102,9 @@ export default function Input({ value, onChange, format }: IInputProps) {
       setDisplay((prev) => ({ ...prev, displayDate: e.target.value }));
       setCalendar(month, year, Number(e.target.value));
       setSelectedDate(dayjs(`${year}-${month + 1}-${e.target.value}`));
+
+      // to update the display date text
+      onChange && onChange(dayjs(`${year}-${month + 1}-${e.target.value}`));
     }
   };
 
@@ -157,7 +167,7 @@ export default function Input({ value, onChange, format }: IInputProps) {
           placeholder="DD"
         />
       </div>
-      <div className="absolute h-3 top-3 left-3 p-1 rounded-full bg-white text-center h-full text-slate-400 hover:text-slate-600">
+      <div className="absolute h-2 top-3 left-3 p-1 rounded-full bg-white text-center h-full text-slate-400 hover:text-slate-600">
         <button onClick={handleOpenCalendar}>
           <FaCalendarDays />
         </button>
